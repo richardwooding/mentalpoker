@@ -18,7 +18,7 @@ func mustKey(t *testing.T) Key {
 // undoing E.
 func TestCommutativeAndRoundTrip(t *testing.T) {
 	a, b := mustKey(t), mustKey(t)
-	for i := 0; i < DeckSize; i++ {
+	for i := range DeckSize {
 		m := Token(i)
 		if a.Decrypt(a.Encrypt(m)).Cmp(m) != 0 {
 			t.Fatalf("round trip failed for card %d", i)
@@ -78,7 +78,7 @@ func TestShuffleDealVerify(t *testing.T) {
 
 	// Deal the top 10 positions to A and verify they are 10 distinct real cards.
 	seen := map[int]bool{}
-	for j := 0; j < 10; j++ {
+	for j := range 10 {
 		card := Decode(a.Decrypt(b.Decrypt(deck2[j])))
 		if card < 0 || seen[card] {
 			t.Fatalf("dealt position %d gave invalid/dup card %d", j, card)

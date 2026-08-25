@@ -50,7 +50,7 @@ func init() {
 	p, _ = new(big.Int).SetString(rfc3526Group14, 16)
 	q = new(big.Int).Rsh(new(big.Int).Sub(p, big.NewInt(1)), 1)
 	tokenIndex = make(map[string]int, DeckSize)
-	for i := 0; i < DeckSize; i++ {
+	for i := range DeckSize {
 		// (i+2)² mod p — a quadratic residue, distinct for these small bases.
 		t := new(big.Int).Exp(big.NewInt(int64(i+2)), two, p)
 		tokens[i] = t
